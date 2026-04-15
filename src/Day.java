@@ -1,23 +1,25 @@
+/**
+ * The Day class represents a single day in the budget tracking system.
+ * Each Day object tracks budget allocations (needs, wants, savings) and
+ * actual spending for that day. This allows users to monitor their spending
+ * against their budget categories.
+ *
+ * author: Sam Ho
+ */
 public class Day {
 
-    // each day is an object
+    private double needs; // Budget allocated for necessities
+    private double wants; // Budget allocated for discretionary spending
+    private double savings; // Budget allocated for savings
+    private double actualSpending; // Actual amount spent on this day
 
-    // expand upon budget, give different categories
-
-    // needs, wants, savings are part of the user's budget. Percentages
-
-    private double needs;
-    private double wants;
-    private double savings;
-    private double actualSpending;
-
-    // budget is an object, contains different categories
-    // budgets will be edited
-
-    // budgets will not be initialized to 0 similar to spending, budget must be used
-    // to create a day
-
-    // constructor
+    /**
+     * Constructs a Day object with specified budget allocations.
+     *
+     * @param needs   the amount budgeted for necessities
+     * @param wants   the amount budgeted for discretionary spending
+     * @param savings the amount budgeted for savings
+     */
     public Day(double needs, double wants, double savings) {
         this.needs = needs;
         this.wants = wants;
@@ -25,24 +27,48 @@ public class Day {
         this.actualSpending = 0;
     }
 
-
-    public void setActualSpending(double actualSpending)
-    {
+    /**
+     * Sets the actual amount spent on this day.
+     *
+     * @param actualSpending the amount actually spent
+     */
+    public void setActualSpending(double actualSpending) {
         this.actualSpending = actualSpending;
     }
 
-    public double getNeeds()
-    {
+    /**
+     * Returns the budget allocated for necessities.
+     *
+     * @return the needs budget amount
+     */
+    public double getNeeds() {
         return needs;
     }
 
-    public double getWants()
-    {
+    /**
+     * Returns the budget allocated for discretionary spending.
+     *
+     * @return the wants budget amount
+     */
+    public double getWants() {
         return wants;
     }
 
-    public double getSavings()
-    {
+    /**
+     * Returns the budget allocated for savings.
+     *
+     * @return the savings budget amount
+     */
+    public double getSavings() {
         return savings;
+    }
+
+    /**
+     * Returns the actual amount spent on this day.
+     *
+     * @return the actual spending amount
+     */
+    public double getActualSpending() {
+        return actualSpending;
     }
 }
