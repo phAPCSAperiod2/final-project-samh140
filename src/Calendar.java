@@ -1,7 +1,7 @@
-public class calendar
+public class Calendar
 {
     // uses "day" objects to create an arrayList
-    
+
 
     // need to be 2D array, will contain day objects
     public day[][] calendar;
