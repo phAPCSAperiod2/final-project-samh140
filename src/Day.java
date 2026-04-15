@@ -24,4 +24,25 @@ public class Day {
         this.savings = savings;
         this.actualSpending = 0;
     }
+
+
+    public void setActualSpending(double actualSpending)
+    {
+        this.actualSpending = actualSpending;
+    }
+
+    public double getNeeds()
+    {
+        return needs;
+    }
+
+    public double getWants()
+    {
+        return wants;
+    }
+
+    public double getSavings()
+    {
+        return savings;
+    }
 }
