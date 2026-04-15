@@ -71,4 +71,12 @@ public class Day {
     public double getActualSpending() {
         return actualSpending;
     }
+
+
+    @Override @Override
+    public String toString() {
+        {
+            return "Budget plan for today:\nNeeds: " + needs + "%\nWants: " + wants + "%\nSavings: " + savings  + "%\nYour Spendings: $" + actualSpending;
+        }
+    }
 }
