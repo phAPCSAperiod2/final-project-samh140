@@ -8,10 +8,14 @@
  */
 public class Day {
 
-    private double needs; // Budget allocated for necessities
-    private double wants; // Budget allocated for discretionary spending
-    private double savings; // Budget allocated for savings
-    private double actualSpending; // Actual amount spent on this day
+    private double needs; // Proportion of budget allocated for necessities
+    private double wants; // Proportion of budget allocated for discretionary spending
+    private double savings; // Proportion of budget allocated for savings
+
+
+    private double spendingForNeeds; // Actual spending for necessities
+    private double spendingForWants; // Actual spending for discretionary spending
+    private double spendingForSavings; // Actual spending for savings
 
     /**
      * Constructs a Day object with specified budget allocations.
@@ -24,16 +28,37 @@ public class Day {
         this.needs = needs;
         this.wants = wants;
         this.savings = savings;
-        this.actualSpending = 0;
+
+        this.spendingForNeeds = 0;
+        this.spendingForWants = 0;
+        this.spendingForSavings = 0;
     }
 
     /**
-     * Sets the actual amount spent on this day.
+     * Sets the spending for needs.
      *
-     * @param actualSpending the amount actually spent
+     * @param spendingForNeeds the amount spent on needs
      */
-    public void setActualSpending(double actualSpending) {
-        this.actualSpending = actualSpending;
+    public void setSpendingForNeeds(double spendingForNeeds) {
+        this.spendingForNeeds = spendingForNeeds;
+    }
+
+    /**
+     * Sets the spending for wants.
+     *
+     * @param spendingForWants the amount spent on wants
+     */
+    public void setSpendingForWants(double spendingForWants) {
+        this.spendingForWants = spendingForWants;
+    }
+
+    /**
+     * Sets the spending for savings.
+     *
+     * @param spendingForSavings the amount spent on savings
+     */
+    public void setSpendingForSavings(double spendingForSavings) {
+        this.spendingForSavings = spendingForSavings;
     }
 
     /**
@@ -64,19 +89,41 @@ public class Day {
     }
 
     /**
-     * Returns the actual amount spent on this day.
+     * Returns the spending for needs.
      *
-     * @return the actual spending amount
+     * @return the spending for needs
      */
-    public double getActualSpending() {
-        return actualSpending;
+    public double getSpendingForNeeds() {
+        return spendingForNeeds;
     }
 
+    /**
+     * Returns the spending for wants.
+     *
+     * @return the spending for wants
+     */
+    public double getSpendingForWants() {
+        return spendingForWants;
+    }
 
-    @Override @Override
+    /**
+     * Returns the spending for savings.
+     *
+     * @return the spending for savings
+     */
+    public double getSpendingForSavings() {
+        return spendingForSavings;
+    }
+
+    /**
+     * Returns a string representation of the Day object.
+     *
+     * @return a string describing the budget plan and spending
+     */
+    @Override
     public String toString() {
         {
-            return "Budget plan for today:\nNeeds: " + needs + "%\nWants: " + wants + "%\nSavings: " + savings  + "%\nYour Spendings: $" + actualSpending;
+            return "Budget plan for today, in proportions:\nNeeds: " + needs + "\nWants: " + wants + "\nSavings: " + savings + "\n\nToday's spendings\nNeeds: $" + spendingForNeeds + "\nWants: $" + spendingForWants + "\nSavings: $" + spendingForSavings;
         }
     }
 }

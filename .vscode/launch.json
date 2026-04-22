@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "calendarTester",
+      "request": "launch",
+      "mainClass": "calendarTester",
+      "projectName": "final-project-samh140_b7b02fb7"
+    },
+    {
+      "type": "java",
       "name": "Run Main",
       "request": "launch",
       "mainClass": "Main",
