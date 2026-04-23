@@ -13,6 +13,8 @@ public class Day {
     private double wantsProp; // Proportion of budget allocated for discretionary spending
     private double savingsProp; // Proportion of budget allocated for savings
 
+    private double dailyIncome;
+
     private double dailyNeedsBudget;
     private double dailyWantsBudget;
     private double dailySavingsBudget;
@@ -33,7 +35,7 @@ public class Day {
         this.wantsProp = wantsProp;
         this.savingsProp = savingsProp;
 
-        double dailyIncome = twoWeekIncome / 14;
+        dailyIncome = twoWeekIncome / 14;
 
         this.dailyNeedsBudget = dailyIncome * needsProp;
         this.dailyWantsBudget = dailyIncome * wantsProp;
@@ -151,6 +153,13 @@ public class Day {
     public double getSpendingForSavings() {
         return spendingForSavings;
     }
+
+
+
+    public double getDailyIncome() {
+        return dailyIncome;
+    }
+
 
     /**
      * Returns a string representation of the Day object.

@@ -26,8 +26,17 @@ public class budgetAnalyzer {
     }
 
 
-    public double calculateTotalSpending(Day day) {
+    public double calculateDayTotalSpending(Day day) {
         return day.getSpendingForNeeds() + day.getSpendingForWants() + day.getSpendingForSavings();
+    }
+
+    public boolean compareDayTotalSpending(Day day) {
+        if (calculateDayTotalSpending(day) < day.getDailyIncome())
+        {
+            return true;
+        }
+
+        return false;
     }
 
     // feedback for one day
@@ -62,6 +71,16 @@ public class budgetAnalyzer {
             System.out.println("Make sure to stay consistent with your savings. Reduce spending in other categories to achieve this.");
         }
 
+    }
+
+    public void getTotalSpendingFeedback(Day day) {
+        if (compareDayTotalSpending(day))
+        {
+            System.out.println("You are spending less than you make! This will help you in the long run.")
+        }
+        else {
+            System.out.println("You spent more than you made today! Limit your spending!");
+        }
     }
 
     // I want a method that generalizes the data for the two weeks.
