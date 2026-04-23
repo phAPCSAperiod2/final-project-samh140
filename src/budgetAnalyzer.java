@@ -30,17 +30,14 @@ public class budgetAnalyzer {
         return day.getSpendingForNeeds() + day.getSpendingForWants() + day.getSpendingForSavings();
     }
 
-
-
-
     // feedback for one day
     public void getNeedsFeedback(Day day) {
         if (compareNeeds(day))
         {
-            System.out.println("");
+            System.out.println("You are staying under budget.");
         }
         else {
-            System.out.println("");
+            System.out.println("You are spending more on needs. Minimialize spending in other categories to keep your spending balanced!");
         }
 
     }
@@ -48,10 +45,10 @@ public class budgetAnalyzer {
     public void getWantsFeedback(Day day) {
         if (compareWants(day))
         {
-            System.out.println("");
+            System.out.println("You are staying under budget");
         }
         else {
-            System.out.println("");
+            System.out.println("Prioritize your wants less! Focus on other categories.");
         }
 
     }
@@ -59,10 +56,10 @@ public class budgetAnalyzer {
     public void getSavingsFeedback(Day day) {
         if (compareSavings(day))
         {
-            System.out.println("");
+            System.out.println("Nice job saving. Keep it going!");
         }
         else {
-            System.out.println("");
+            System.out.println("Make sure to stay consistent with your savings. Reduce spending in other categories to achieve this.");
         }
 
     }
