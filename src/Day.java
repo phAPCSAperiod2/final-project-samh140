@@ -1,6 +1,7 @@
 /**
  * The Day class represents a single day in the budget tracking system.
- * Each Day object tracks budget allocations (needs, wants, savings) and
+ * Each Day object tracks budget allocations (needsProp, wantsProp, savingsProp)
+ * and
  * actual spending for that day. This allows users to monitor their spending
  * against their budget categories.
  *
@@ -8,10 +9,13 @@
  */
 public class Day {
 
-    private double needs; // Proportion of budget allocated for necessities
-    private double wants; // Proportion of budget allocated for discretionary spending
-    private double savings; // Proportion of budget allocated for savings
+    private double needsProp; // Proportion of budget allocated for necessities
+    private double wantsProp; // Proportion of budget allocated for discretionary spending
+    private double savingsProp; // Proportion of budget allocated for savings
 
+    private double dailyNeedsBudget;
+    private double dailyWantsBudget;
+    private double dailySavingsBudget;
 
     private double spendingForNeeds; // Actual spending for necessities
     private double spendingForWants; // Actual spending for discretionary spending
@@ -20,14 +24,20 @@ public class Day {
     /**
      * Constructs a Day object with specified budget allocations.
      *
-     * @param needs   the amount budgeted for necessities
-     * @param wants   the amount budgeted for discretionary spending
-     * @param savings the amount budgeted for savings
+     * @param needsProp   the proportion budgeted for necessities
+     * @param wantsProp   the proportion budgeted for discretionary spending
+     * @param savingsProp the proportion budgeted for savings
      */
-    public Day(double needs, double wants, double savings) {
-        this.needs = needs;
-        this.wants = wants;
-        this.savings = savings;
+    public Day(double needsProp, double wantsProp, double savingsProp, double twoWeekIncome) {
+        this.needsProp = needsProp;
+        this.wantsProp = wantsProp;
+        this.savingsProp = savingsProp;
+
+        double dailyIncome = twoWeekIncome / 14;
+
+        this.dailyNeedsBudget = dailyIncome * needsProp;
+        this.dailyWantsBudget = dailyIncome * wantsProp;
+        this.dailySavingsBudget = dailyIncome * savingsProp;
 
         this.spendingForNeeds = 0;
         this.spendingForWants = 0;
@@ -66,8 +76,8 @@ public class Day {
      *
      * @return the needs budget amount
      */
-    public double getNeeds() {
-        return needs;
+    public double getNeedsProp() {
+        return needsProp;
     }
 
     /**
@@ -75,8 +85,8 @@ public class Day {
      *
      * @return the wants budget amount
      */
-    public double getWants() {
-        return wants;
+    public double getWantsProp() {
+        return wantsProp;
     }
 
     /**
@@ -84,8 +94,35 @@ public class Day {
      *
      * @return the savings budget amount
      */
-    public double getSavings() {
-        return savings;
+    public double getSavingsProp() {
+        return savingsProp;
+    }
+
+    /**
+     * Returns the daily budget for necessities.
+     *
+     * @return the daily needs budget amount
+     */
+    public double getDailyNeedsBudget() {
+        return dailyNeedsBudget;
+    }
+
+    /**
+     * Returns the daily budget for discretionary spending.
+     *
+     * @return the daily wants budget amount
+     */
+    public double getDailyWantsBudget() {
+        return dailyWantsBudget;
+    }
+
+    /**
+     * Returns the daily budget for savings.
+     *
+     * @return the daily savings budget amount
+     */
+    public double getDailySavingsBudget() {
+        return dailySavingsBudget;
     }
 
     /**
@@ -123,7 +160,9 @@ public class Day {
     @Override
     public String toString() {
         {
-            return "Budget plan for today, in proportions:\nNeeds: " + needs + "\nWants: " + wants + "\nSavings: " + savings + "\n\nToday's spendings\nNeeds: $" + spendingForNeeds + "\nWants: $" + spendingForWants + "\nSavings: $" + spendingForSavings;
+            return "Budget plan for today, in proportions:\nNeeds: " + needsProp + "\nWants: " + wantsProp
+                    + "\nSavings: " + savingsProp + "\n\nToday's spendings\nNeeds: $" + spendingForNeeds + "\nWants: $"
+                    + spendingForWants + "\nSavings: $" + spendingForSavings;
         }
     }
 }

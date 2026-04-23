@@ -1,14 +1,16 @@
 public class budgetAnalyzer
 {
 
-// compare budget and actualSpending
-
-// check non negative values
+    private double twoWeekIncome;
 
 
-// create invalid if proportions for budget do not add up
+
+    public boolean compareSpending() {
+        
 
 
+        return false;
+    }
 
 
 }

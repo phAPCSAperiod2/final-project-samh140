@@ -6,3 +6,7 @@ public class calendarTester
         System.out.println(day.toString());
     }
 }
+
+
+
+// ask for how much the user makes in main
