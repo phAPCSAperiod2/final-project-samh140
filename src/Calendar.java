@@ -51,4 +51,23 @@ public class Calendar
     }
 
 
+    public String toString()
+    {
+        String result = "";
+
+        for (int row = 0; row < calendar.length; row++)
+        {
+            result += "Week " + (row + 1) + ":\n";
+
+            for (int column = 0; column < calendar[row].length; column++)
+            {
+                int dayNumber = row * 7 + column + 1;
+                result += "Day " + dayNumber;
+            }
+            result+= "\n\n";
+        }
+
+        return result;
+    }
+
 }

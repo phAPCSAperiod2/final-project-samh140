@@ -8,6 +8,10 @@ public class calendarTester
         // instance of budgetAnalyzer
         budgetAnalyzer analyzer = new budgetAnalyzer();
         analyzer.getNeedsFeedback(day);
+
+        Calendar calendar = new Calendar(0.5, 0.5, 0.2, 2000);
+        System.out.println(calendar.toString());
+        System.out.println(calendar.getDay(13));
     }
 }
 
