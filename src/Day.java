@@ -21,7 +21,7 @@ public class Day {
 
     private double spendingForNeeds; // Actual spending for necessities
     private double spendingForWants; // Actual spending for discretionary spending
-    private double spendingForSavings; // Actual spending for savings
+    private double savingsAllocated; // Actual amount allocated to savings
 
     /**
      * Constructs a Day object with specified budget allocations.
@@ -43,7 +43,7 @@ public class Day {
 
         this.spendingForNeeds = 0;
         this.spendingForWants = 0;
-        this.spendingForSavings = 0;
+        this.savingsAllocated = 0;
     }
 
     /**
@@ -65,12 +65,12 @@ public class Day {
     }
 
     /**
-     * Sets the spending for savings.
+     * Sets the amount allocated for savings for the day.
      *
-     * @param spendingForSavings the amount spent on savings
+     * @param savingsAllocated the amount allocated toward savings
      */
-    public void setSpendingForSavings(double spendingForSavings) {
-        this.spendingForSavings = spendingForSavings;
+    public void setSavingsAllocated(double savingsAllocated) {
+        this.savingsAllocated = savingsAllocated;
     }
 
     /**
@@ -146,20 +146,17 @@ public class Day {
     }
 
     /**
-     * Returns the spending for savings.
+     * Returns the amount allocated for savings for the day.
      *
-     * @return the spending for savings
+     * @return the daily savings allocation amount
      */
-    public double getSpendingForSavings() {
-        return spendingForSavings;
+    public double getSavingsAllocated() {
+        return savingsAllocated;
     }
-
-
 
     public double getDailyIncome() {
         return dailyIncome;
     }
-
 
     /**
      * Returns a string representation of the Day object.
@@ -171,7 +168,7 @@ public class Day {
         {
             return "Budget plan for today, in proportions:\nNeeds: " + needsProp + "\nWants: " + wantsProp
                     + "\nSavings: " + savingsProp + "\n\nToday's spendings\nNeeds: $" + spendingForNeeds + "\nWants: $"
-                    + spendingForWants + "\nSavings: $" + spendingForSavings;
+                    + spendingForWants + "\nSavings: $" + savingsAllocated;
         }
     }
 }

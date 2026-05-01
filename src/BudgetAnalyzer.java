@@ -37,14 +37,14 @@ public class BudgetAnalyzer {
     }
 
     /**
-     * Returns whether the savings spending meets or exceeds the savings target.
+     * Returns whether the savings allocation meets or exceeds the savings target.
      *
-     * @param day the Day object containing spending and budget values
-     * @return true if savings spending is greater than or equal to the savings
+     * @param day the Day object containing savings allocation and budget values
+     * @return true if savings allocation is greater than or equal to the savings
      *         budget, false otherwise
      */
     public boolean compareSavings(Day day) {
-        if (day.getDailySavingsBudget() <= day.getSpendingForSavings()) {
+        if (day.getDailySavingsBudget() <= day.getSavingsAllocated()) {
             return true;
         }
 
@@ -58,7 +58,7 @@ public class BudgetAnalyzer {
      * @return the total spending for the day
      */
     public double calculateDayTotalSpending(Day day) {
-        return day.getSpendingForNeeds() + day.getSpendingForWants() + day.getSpendingForSavings();
+        return day.getSpendingForNeeds() + day.getSpendingForWants() + day.getSavingsAllocated();
     }
 
     /**
