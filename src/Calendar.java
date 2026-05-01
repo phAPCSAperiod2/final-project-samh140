@@ -115,7 +115,7 @@ public class Calendar
             for (int column = 0; column < calendar[row].length; column++)
             {
                 int dayNumber = row * 7 + column + 1;
-                result += "Day " + dayNumber;
+                result += "Day " + dayNumber + "      ";
             }
             result+= "\n\n";
         }

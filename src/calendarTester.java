@@ -12,6 +12,18 @@ public class calendarTester
         Calendar calendar = new Calendar(0.5, 0.5, 0.2, 2000);
         System.out.println(calendar.toString());
         System.out.println(calendar.getDay(13));
+
+
+
+        System.out.println(day.getDailyIncome());
+        Day selectedDay = calendar.getDay(3);
+
+        selectedDay.setSpendingForNeeds(3000);
+        calendar.overBudgetDays(analyzer);
+
+
+
+        System.out.println(calendar.displayOverBudgetDays());
     }
 }
 
