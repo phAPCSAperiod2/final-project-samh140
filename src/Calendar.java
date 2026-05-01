@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Calendar
 {
     private Day[][] calendar;
@@ -5,6 +7,9 @@ public class Calendar
     private final int DAYS_PER_WEEK = 7;
     private final int MINIMUM_DAY_NUMBER = 1;
     private final int MAXIMUM_DAY_NUMBER = 14;
+
+
+    private ArrayList<Integer> overBudgetDays;
 
 
     public Calendar(double needsProp, double wantsProp, double savingsProp, double twoWeekIncome)
@@ -19,7 +24,10 @@ public class Calendar
             }
         }
 
+        overBudgetDays = new ArrayList<>();
+
     }
+
 
     public boolean isValidDayNumber(int dayNumber)
     {
@@ -50,6 +58,51 @@ public class Calendar
         return day.toString();
     }
 
+    public int getDayNumber(Day target)
+    {
+        for (int row = 0; row < calendar.length; row++)
+        {
+            for (int column = 0; column < calendar[row].length; column++)
+            {
+                if (calendar[row][column] == target)
+                {
+                    return row * 7 + column + 1;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    public void overBudgetDays(BudgetAnalyzer analyzer)
+    {
+        overBudgetDays.clear();
+
+        for (int row = 0; row < calendar.length; row++)
+        {
+            for (int column = 0; column < calendar[row].length; column++)
+            {
+                Day selectedDay = calendar[row][column];
+                int dayNumber = getDayNumber(selectedDay);
+
+                if (!analyzer.compareDayTotalSpending(selectedDay))
+                {
+                    overBudgetDays.add(dayNumber);
+                }
+
+            }
+        }
+    }
+
+    public String displayOverBudgetDays()
+    {
+        if (overBudgetDays.isEmpty())
+        {
+            return "No days are over budget.";
+        }
+
+        return "Over budget days: " + overBudgetDays;
+    }
 
     public String toString()
     {

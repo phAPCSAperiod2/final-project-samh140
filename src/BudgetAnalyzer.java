@@ -6,7 +6,7 @@
  *
  *  author: Sam Ho
  */
-public class budgetAnalyzer {
+public class BudgetAnalyzer {
 
     /**
      * Returns whether the spending for needs is below the needs budget.

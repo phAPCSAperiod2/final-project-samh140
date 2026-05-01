@@ -6,7 +6,7 @@ public class calendarTester
         System.out.println(day.toString());
 
         // instance of budgetAnalyzer
-        budgetAnalyzer analyzer = new budgetAnalyzer();
+        BudgetAnalyzer analyzer = new BudgetAnalyzer();
         analyzer.getNeedsFeedback(day);
 
         Calendar calendar = new Calendar(0.5, 0.5, 0.2, 2000);
