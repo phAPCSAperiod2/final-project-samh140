@@ -5,7 +5,7 @@
  * actual spending for that day. This allows users to monitor their spending
  * against their budget categories.
  *
- * author: Sam Ho
+ * @author: Sam Ho
  */
 public class Day {
 

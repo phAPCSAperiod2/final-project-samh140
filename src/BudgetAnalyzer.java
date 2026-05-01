@@ -4,7 +4,7 @@
  * This class compares actual spending against budgeted amounts and prints
  * feedback messages for needs, wants, savings, and total daily spending.
  *
- *  author: Sam Ho
+ * @author: Sam Ho
  */
 public class BudgetAnalyzer {
 
