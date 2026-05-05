@@ -82,13 +82,28 @@ public class BudgetAnalyzer {
      */
     public void getNeedsFeedback(Day day) {
         if (compareNeeds(day)) {
-            System.out.println("You are staying under budget.");
-        } else {
-            System.out.println(
-                    "You are spending more on needs. Minimialize spending in other categories to keep your spending balanced!");
+            System.out.println("You are under budget.");
+        }
+        else
+        {
+            if (!compareWants(day))
+            {
+                System.out.println("Reduce your spending in wants to balance your budget.");
+            }
+            else if (!compareSavings(day))
+            {
+                System.out.println("Make sure you are consistent with your saving plan. You can spend less on needs for the following days to balance your spending.");
+            }
+            else
+            {
+                System.out.println("You should spend less on your needs.");
+            }
+
         }
 
     }
+
+
 
     /**
      * Prints feedback about wants spending for the given day.
@@ -97,9 +112,23 @@ public class BudgetAnalyzer {
      */
     public void getWantsFeedback(Day day) {
         if (compareWants(day)) {
-            System.out.println("You are staying under budget");
-        } else {
-            System.out.println("Prioritize your wants less! Focus on other categories.");
+            System.out.println("You are under budget");
+        }
+        else
+        {
+            if (!compareNeeds(day))
+            {
+                System.out.println("Prioritize your wants less! You are already over budget on needs.");
+            }
+            else if (!compareSavings(day))
+            {
+                System.out.println("Reduce your spending on your wants and invest in savings!");
+            }
+            else
+            {
+                System.out.println("You should spend less on your wants.");
+            }
+
         }
 
     }
@@ -111,10 +140,23 @@ public class BudgetAnalyzer {
      */
     public void getSavingsFeedback(Day day) {
         if (compareSavings(day)) {
+            if (compareNeeds(day))
+            {
+                System.out.println("You can spend more on your needs. Make sure you are paying for everything you need!");
+            }
             System.out.println("Nice job saving. Keep it going!");
-        } else {
-            System.out.println(
-                    "Make sure to stay consistent with your savings. Reduce spending in other categories to achieve this.");
+        }
+        else
+        {
+            if (!compareNeeds(day))
+            {
+                System.out.println("You should limit your spending on needs. Instead, invest more in your savings to stay consistent.");
+            }
+            else if (!compareWants(day))
+            {
+                System.out.println("Limit your spending on your wants and invest in savings!");
+            }
+            System.out.println("Stay consistant with your savings! It will help in the long run.");
         }
 
     }
@@ -127,19 +169,12 @@ public class BudgetAnalyzer {
     public void getTotalSpendingFeedback(Day day) {
         if (compareDayTotalSpending(day)) {
             System.out.println("You are spending less than you make! This will help you in the long run.");
-        } else {
+        }
+        else
+        {
             System.out.println("You spent more than you made today! Limit your spending!");
         }
     }
 
-    // I want a method that generalizes the data for the two weeks.
-    // feedback generalized to two weeks
 
-    // every day is an object that can be edited. The user can choose feedback they
-    // want to see.
-    // values that they do not edit are equal to 0, can still get feedback on them.
-
-    // the user will gain full access to the calendar, can edit any days they want,
-    // until they complete the week (or choose to compelete it).
-    // complete the week, get feedback for whole week.
 }
