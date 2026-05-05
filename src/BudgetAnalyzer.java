@@ -58,7 +58,7 @@ public class BudgetAnalyzer {
      * @return the total spending for the day
      */
     public double calculateDayTotalSpending(Day day) {
-        return day.getSpendingForNeeds() + day.getSpendingForWants() + day.getSavingsAllocated();
+        return day.getSpendingForNeeds() + day.getSpendingForWants();
     }
 
     /**
