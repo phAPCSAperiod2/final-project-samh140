@@ -88,7 +88,7 @@ public class BudgetAnalyzer {
         {
             if (!compareWants(day))
             {
-                System.out.println("Reduce your spending in wants to balance your budget.");
+                System.out.println("Reduce your spending in wants to balance your spending with needs. You should reduce your spending for needs on following days as well.");
             }
             else if (!compareSavings(day))
             {
@@ -144,7 +144,10 @@ public class BudgetAnalyzer {
             {
                 System.out.println("You can spend more on your needs. Make sure you are paying for everything you need!");
             }
-            System.out.println("Nice job saving. Keep it going!");
+            else
+            {
+                System.out.println("Nice job saving. Keep it going!");
+            }
         }
         else
         {
@@ -156,7 +159,10 @@ public class BudgetAnalyzer {
             {
                 System.out.println("Limit your spending on your wants and invest in savings!");
             }
-            System.out.println("Stay consistant with your savings! It will help in the long run.");
+            else
+            {
+                System.out.println("Stay consistant with your savings! It will help in the long run.");
+            }
         }
 
     }
