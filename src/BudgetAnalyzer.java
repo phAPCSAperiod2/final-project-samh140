@@ -88,7 +88,7 @@ public class BudgetAnalyzer {
         {
             if (!compareWants(day))
             {
-                System.out.println("Reduce your spending in wants to balance your spending with needs. You should reduce your spending for needs on following days as well.");
+                System.out.println("You went overbudget in your needs category. Reduce your spending in wants to balance your spending.");
             }
             else if (!compareSavings(day))
             {
@@ -96,14 +96,12 @@ public class BudgetAnalyzer {
             }
             else
             {
-                System.out.println("You should spend less on your needs.");
+                System.out.println("You should spend less on your needs. You have spent past your goal.");
             }
 
         }
 
     }
-
-
 
     /**
      * Prints feedback about wants spending for the given day.
@@ -118,7 +116,7 @@ public class BudgetAnalyzer {
         {
             if (!compareNeeds(day))
             {
-                System.out.println("Prioritize your wants less! You are already over budget on needs.");
+                System.out.println("Prioritize your wants less! You are already over budget on needs, decrease spending on wants to balance your spending.");
             }
             else if (!compareSavings(day))
             {
@@ -126,7 +124,7 @@ public class BudgetAnalyzer {
             }
             else
             {
-                System.out.println("You should spend less on your wants.");
+                System.out.println("You should spend less on your wants. You have spent past your goal.");
             }
 
         }
@@ -161,7 +159,7 @@ public class BudgetAnalyzer {
             }
             else
             {
-                System.out.println("Stay consistant with your savings! It will help in the long run.");
+                System.out.println("Put more money in your savings to reach your goal!");
             }
         }
 
@@ -181,6 +179,5 @@ public class BudgetAnalyzer {
             System.out.println("You spent more than you made today! Limit your spending!");
         }
     }
-
 
 }

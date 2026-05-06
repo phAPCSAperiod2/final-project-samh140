@@ -26,7 +26,3 @@ public class calendarTester
         System.out.println(calendar.displayOverBudgetDays());
     }
 }
-
-
-
-// ask for how much the user makes in main
