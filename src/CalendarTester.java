@@ -25,11 +25,11 @@ public class CalendarTester
         System.out.print("Enter wants proportion: ");
         double wantsProp = scanner.nextDouble();
 
-        System.out.print("enter savings proportion: ");
+        System.out.print("Enter savings proportion: ");
         double savingsProp = scanner.nextDouble();
 
-        while(!validProportions(needsProp, wantsProp, savingsProp)) {
-            System.out.println("Budget proportions cannot exceed 1.");
+        while(!validProportions(needsProp, wantsProp, savingsProp) || !validNumber(needsProp) || !validNumber(wantsProp) || !validNumber(savingsProp)) {
+            System.out.println("Proportions must be nonnegative and must be equal to 1.");
 
             System.out.print("Re-enter needs proportion: ");
             needsProp = scanner.nextDouble();
@@ -111,6 +111,13 @@ public class CalendarTester
 
             System.out.print("Enter amount: ");
             double amount = scanner.nextDouble();
+            while (!validNumber(amount))
+            {
+                System.out.println("Amount cannot be negative.");
+
+                System.out.print("Re-enter amount: ");
+                amount = scanner.nextDouble();
+            }
 
             if (categoryChoice == 1) {
                 selectedDay.setSpendingForNeeds(amount);
@@ -180,6 +187,11 @@ public class CalendarTester
 
     public static boolean validProportions(double needs, double wants, double savings)
     {
-        return needs + wants + savings <= 1;
+        return needs + wants + savings == 1;
+    }
+
+    public static boolean validNumber(double number)
+    {
+        return number >= 0;
     }
 }
