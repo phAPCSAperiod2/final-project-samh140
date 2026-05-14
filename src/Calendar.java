@@ -75,10 +75,6 @@ public class Calendar {
     public String viewDay(int dayNumber) {
         Day day = getDay(dayNumber);
 
-        if (day == null) {
-            return "Invalid day number.";
-        }
-
         return day.toString();
     }
 
@@ -106,7 +102,7 @@ public class Calendar {
      *
      * @param analyzer the BudgetAnalyzer used to validate daily spending
      */
-    public void overBudgetDays(BudgetAnalyzer analyzer) {
+    public void updateOverBudgetDays(BudgetAnalyzer analyzer) {
         overBudgetDays.clear();
 
         for (int row = 0; row < calendar.length; row++) {

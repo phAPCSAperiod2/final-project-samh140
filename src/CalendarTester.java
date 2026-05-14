@@ -58,7 +58,7 @@ public class CalendarTester
                 editDay(scanner, calendar, analyzer);
             }
             else if (choice == 2) {
-                calendar.overBudgetDays(analyzer);
+                calendar.updateOverBudgetDays(analyzer);
                 System.out.println(calendar.displayOverBudgetDays());
             }
             else if (choice == 3) {
@@ -92,8 +92,8 @@ public class CalendarTester
 
         Day selectedDay = calendar.getDay(dayNumber);
 
-        System.out.print("\n===== Current Day Information =====\n");
-        System.out.println(selectedDay);
+        System.out.println("\n===== Current Day Information =====");
+        System.out.println(calendar.viewDay(dayNumber));
 
         System.out.println("\nWhat would you like to do?");
         System.out.println("1. Edit Day");
@@ -126,8 +126,10 @@ public class CalendarTester
                 return;
             }
 
+            calendar.updateOverBudgetDays(analyzer);
+
             System.out.println("\n===== Updated Day Information =====");
-            System.out.println(selectedDay);
+            System.out.println(calendar.viewDay(dayNumber));
         }
 
         else if (choice == 2){
