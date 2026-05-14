@@ -28,6 +28,19 @@ public class CalendarTester
         System.out.print("enter savings proportion: ");
         double savingsProp = scanner.nextDouble();
 
+        while(!validProportions(needsProp, wantsProp, savingsProp)) {
+            System.out.println("Budget proportions cannot exceed 1.");
+
+            System.out.print("Re-enter needs proportion: ");
+            needsProp = scanner.nextDouble();
+
+            System.out.print("Re-enter wants proportion: ");
+            wantsProp = scanner.nextDouble();
+
+            System.out.print("Re-enter savings proportion: ");
+            savingsProp = scanner.nextDouble();
+        }
+
         return new Calendar(needsProp, wantsProp, savingsProp, twoWeekIncome);
     }
 
@@ -161,5 +174,10 @@ public class CalendarTester
         else {
             System.out.println("Invalid choice.");
         }
+    }
+
+    public static boolean validProportions(double needs, double wants, double savings)
+    {
+        return needs + wants + savings <= 1;
     }
 }
