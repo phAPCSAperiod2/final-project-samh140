@@ -16,28 +16,34 @@ public class CalendarTester
 
     public static Calendar createCalendar(Scanner scanner)
     {
+        System.out.println("Welcome! Create a budget calendar for your two-week income plan.");
         System.out.print("Enter your two week income: ");
         double twoWeekIncome = scanner.nextDouble();
+        while(!validNumber(twoWeekIncome))
+        {
+            System.out.println("Please enter a nonnegative amount.");
+            twoWeekIncome = scanner.nextDouble();
+        }
 
-        System.out.print("Enter needs proportion: ");
+        System.out.print("Enter proportion of income for NEEDS: ");
         double needsProp = scanner.nextDouble();
 
-        System.out.print("Enter wants proportion: ");
+        System.out.print("Enter proportion of income for WANTS: ");
         double wantsProp = scanner.nextDouble();
 
-        System.out.print("Enter savings proportion: ");
+        System.out.print("Enter proportion of income for SAVINGS: ");
         double savingsProp = scanner.nextDouble();
 
         while(!validProportions(needsProp, wantsProp, savingsProp) || !validNumber(needsProp) || !validNumber(wantsProp) || !validNumber(savingsProp)) {
             System.out.println("Proportions must be nonnegative and must be equal to 1.");
 
-            System.out.print("Re-enter needs proportion: ");
+            System.out.print("Re-enter proportion of income for NEEDS: ");
             needsProp = scanner.nextDouble();
 
-            System.out.print("Re-enter wants proportion: ");
+            System.out.print("Re-enter proportion of income for WANTS: ");
             wantsProp = scanner.nextDouble();
 
-            System.out.print("Re-enter savings proportion: ");
+            System.out.print("Re-enter proportion of income for SAVINGS: ");
             savingsProp = scanner.nextDouble();
         }
 
@@ -66,7 +72,7 @@ public class CalendarTester
                 System.out.println("Program ended.");
             }
             else {
-                System.out.println("Invalid choice.");
+                System.out.println("\nInvalid choice.");
             }
         }
     }
@@ -74,7 +80,7 @@ public class CalendarTester
     public static void displayMenu() {
         System.out.println("\n===== Budget Tracker =====");
         System.out.println("1. View/Edit Day");
-        System.out.println("2. View Over Budget Days");
+        System.out.println("2. View Days Over Budget");
         System.out.println("3. Exit");
         System.out.print("Choose an option: ");
     }
@@ -92,61 +98,76 @@ public class CalendarTester
 
         Day selectedDay = calendar.getDay(dayNumber);
 
-        System.out.println("\n===== Current Day Information =====");
-        System.out.println(calendar.viewDay(dayNumber));
+        boolean editingDay = true;
 
-        System.out.println("\nWhat would you like to do?");
-        System.out.println("1. Edit Day");
-        System.out.println("2. View Feedback");
-        System.out.println("3. Return to Main Menu");
-        System.out.print("Choose an option: ");
-
-        int choice = scanner.nextInt();
-
-        if (choice == 1)
+        while(editingDay)
         {
-            displayCategoryMenu();
+            System.out.println("\n===== Current Day Information =====");
+            System.out.println(calendar.viewDay(dayNumber));
 
-            int categoryChoice = scanner.nextInt();
+            System.out.println("\nWhat would you like to do?");
+            System.out.println("1. Edit Day");
+            System.out.println("2. View Feedback");
+            System.out.println("3. Return to Main Menu");
+            System.out.print("Choose an option: ");
 
-            System.out.print("Enter amount: ");
-            double amount = scanner.nextDouble();
-            while (!validNumber(amount))
+            int choice = scanner.nextInt();
+
+            if (choice == 1)
             {
-                System.out.println("Amount cannot be negative.");
+                displayCategoryMenu();
 
-                System.out.print("Re-enter amount: ");
-                amount = scanner.nextDouble();
+                int categoryChoice = scanner.nextInt();
+
+                System.out.print("Enter amount: ");
+                double amount = scanner.nextDouble();
+                while (!validNumber(amount))
+                {
+                    System.out.println("Amount cannot be negative.");
+
+                    System.out.print("Re-enter amount: ");
+                    amount = scanner.nextDouble();
+                }
+
+                if (categoryChoice == 1) {
+                    selectedDay.setSpendingForNeeds(amount);
+
+                    calendar.updateOverBudgetDays(analyzer);
+
+                    System.out.println("\n===== Updated Day Information =====");
+                    System.out.println(calendar.viewDay(dayNumber));
+                }
+                else if (categoryChoice == 2) {
+                    selectedDay.setSpendingForWants(amount);
+
+                    calendar.updateOverBudgetDays(analyzer);
+
+                    System.out.println("\n===== Updated Day Information =====");
+                    System.out.println(calendar.viewDay(dayNumber));
+                }
+                else if (categoryChoice == 3) {
+                    selectedDay.setSavingsAllocated(amount);
+
+                    calendar.updateOverBudgetDays(analyzer);
+
+                    System.out.println("\n===== Updated Day Information =====");
+                    System.out.println(calendar.viewDay(dayNumber));
+                }
+                else {
+                    System.out.println("Invalid category.");
+                }
             }
 
-            if (categoryChoice == 1) {
-                selectedDay.setSpendingForNeeds(amount);
+            else if (choice == 2){
+                chooseFeedback(scanner, analyzer, selectedDay);
             }
-            else if (categoryChoice == 2) {
-                selectedDay.setSpendingForWants(amount);
-            }
-            else if (categoryChoice == 3) {
-                selectedDay.setSavingsAllocated(amount);
+            else if (choice == 3) {
+                editingDay = false;
+                System.out.println("\nReturning to main menu.");
             }
             else {
-                System.out.println("Invalid category.");
-                return;
+                System.out.println("\nInvalid choice.");
             }
-
-            calendar.updateOverBudgetDays(analyzer);
-
-            System.out.println("\n===== Updated Day Information =====");
-            System.out.println(calendar.viewDay(dayNumber));
-        }
-
-        else if (choice == 2){
-            chooseFeedback(scanner, analyzer, selectedDay);
-        }
-        else if (choice == 3) {
-            System.out.println("Returning to main menu.");
-        }
-        else {
-            System.out.println("Invalid choice.");
         }
     }
 
@@ -159,29 +180,39 @@ public class CalendarTester
     }
 
     public static void chooseFeedback(Scanner scanner, BudgetAnalyzer analyzer, Day day) {
-        System.out.println("\n===== Feedback Menu =====");
-        System.out.println("1. Needs Feedback");
-        System.out.println("2. Wants Feedback");
-        System.out.println("3. Savings Feedback");
-        System.out.println("4. Total Spending Feedback");
-        System.out.print("Choose feedback to view: ");
+        boolean viewingFeedback = true;
 
-        int choice = scanner.nextInt();
+        while (viewingFeedback)
+        {
+            System.out.println("\n===== Feedback Menu =====");
+            System.out.println("1. Needs Feedback");
+            System.out.println("2. Wants Feedback");
+            System.out.println("3. Savings Feedback");
+            System.out.println("4. Total Spending Feedback");
+            System.out.println("5. Return to Day Menu");
+            System.out.print("Choose feedback to view: ");
 
-        if (choice == 1) {
-            analyzer.getNeedsFeedback(day);
-        }
-        else if (choice == 2) {
-            analyzer.getWantsFeedback(day);
-        }
-        else if (choice == 3) {
-            analyzer.getSavingsFeedback(day);
-        }
-        else if (choice == 4) {
-            analyzer.getTotalSpendingFeedback(day);
-        }
-        else {
-            System.out.println("Invalid choice.");
+            int choice = scanner.nextInt();
+
+            if (choice == 1) {
+                analyzer.getNeedsFeedback(day);
+            }
+            else if (choice == 2) {
+                analyzer.getWantsFeedback(day);
+            }
+            else if (choice == 3) {
+                analyzer.getSavingsFeedback(day);
+            }
+            else if (choice == 4) {
+                analyzer.getTotalSpendingFeedback(day);
+            }
+            else if (choice == 5) {
+                viewingFeedback = false;
+                System.out.println("\nReturning to day menu.");
+            }
+            else {
+                System.out.println("\nInvalid choice.");
+            }
         }
     }
 
