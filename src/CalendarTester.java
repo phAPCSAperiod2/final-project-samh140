@@ -1,7 +1,21 @@
 import java.util.Scanner;
 
-public class CalendarTester
-{
+/**
+ * A simple console-based tester for the budgeting calendar application.
+ * <p>
+ * This class handles user interaction, menu display, and day editing for
+ * a two-week budget plan using {@link Calendar} and {@link BudgetAnalyzer}.
+ *
+ * @author Sam Ho
+ * @collaborator ChatGPT
+ */
+public class CalendarTester {
+    /**
+     * Application entry point. Creates the calendar, budget analyzer, and
+     * starts the main program loop.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -14,13 +28,18 @@ public class CalendarTester
         scanner.close();
     }
 
-    public static Calendar createCalendar(Scanner scanner)
-    {
+    /**
+     * Prompts the user for income and budget proportions, validates the input,
+     * and returns a configured {@link Calendar} instance.
+     *
+     * @param scanner the scanner used to read keyboard input
+     * @return a new Calendar configured with the provided proportions and income
+     */
+    public static Calendar createCalendar(Scanner scanner) {
         System.out.println("Welcome! Create a budget calendar for your two-week income plan.");
         System.out.print("Enter your two week income: ");
         double twoWeekIncome = scanner.nextDouble();
-        while(!validNumber(twoWeekIncome))
-        {
+        while (!validNumber(twoWeekIncome)) {
             System.out.println("Please enter a nonnegative amount.");
             twoWeekIncome = scanner.nextDouble();
         }
@@ -34,7 +53,8 @@ public class CalendarTester
         System.out.print("Enter proportion of income for SAVINGS: ");
         double savingsProp = scanner.nextDouble();
 
-        while(!validProportions(needsProp, wantsProp, savingsProp) || !validNumber(needsProp) || !validNumber(wantsProp) || !validNumber(savingsProp)) {
+        while (!validProportions(needsProp, wantsProp, savingsProp) || !validNumber(needsProp)
+                || !validNumber(wantsProp) || !validNumber(savingsProp)) {
             System.out.println("Proportions must be nonnegative and must be equal to 1.");
 
             System.out.print("Re-enter proportion of income for NEEDS: ");
@@ -50,33 +70,40 @@ public class CalendarTester
         return new Calendar(needsProp, wantsProp, savingsProp, twoWeekIncome);
     }
 
-    public static void runProgram(Scanner scanner, Calendar calendar, BudgetAnalyzer analyzer)
-    {
+    /**
+     * Runs the main program loop, presenting the user with the primary menu
+     * and handling menu selections.
+     *
+     * @param scanner  the scanner used to read keyboard input
+     * @param calendar the calendar containing the 14-day budget data
+     * @param analyzer the budget analyzer used for feedback and over-budget checks
+     */
+    public static void runProgram(Scanner scanner, Calendar calendar, BudgetAnalyzer analyzer) {
 
         boolean run = true;
 
-        while(run) {
+        while (run) {
             displayMenu();
 
             int choice = scanner.nextInt();
 
             if (choice == 1) {
                 editDay(scanner, calendar, analyzer);
-            }
-            else if (choice == 2) {
+            } else if (choice == 2) {
                 calendar.updateOverBudgetDays(analyzer);
                 System.out.println(calendar.displayOverBudgetDays());
-            }
-            else if (choice == 3) {
+            } else if (choice == 3) {
                 run = false;
                 System.out.println("Program ended.");
-            }
-            else {
+            } else {
                 System.out.println("\nInvalid choice.");
             }
         }
     }
 
+    /**
+     * Prints the main menu options for the budget tracker application.
+     */
     public static void displayMenu() {
         System.out.println("\n===== Budget Tracker =====");
         System.out.println("1. View/Edit Day");
@@ -85,6 +112,14 @@ public class CalendarTester
         System.out.print("Choose an option: ");
     }
 
+    /**
+     * Allows the user to select a day and either edit spending values or view
+     * feedback for that day.
+     *
+     * @param scanner  the scanner used to read keyboard input
+     * @param calendar the calendar containing the day entries
+     * @param analyzer the budget analyzer used to update budget status and feedback
+     */
     public static void editDay(Scanner scanner, Calendar calendar, BudgetAnalyzer analyzer) {
         System.out.println("\n" + calendar);
 
@@ -100,8 +135,7 @@ public class CalendarTester
 
         boolean editingDay = true;
 
-        while(editingDay)
-        {
+        while (editingDay) {
             System.out.println("\n===== Current Day Information =====");
             System.out.println(calendar.viewDay(dayNumber));
 
@@ -113,16 +147,14 @@ public class CalendarTester
 
             int choice = scanner.nextInt();
 
-            if (choice == 1)
-            {
+            if (choice == 1) {
                 displayCategoryMenu();
 
                 int categoryChoice = scanner.nextInt();
 
                 System.out.print("Enter amount: ");
                 double amount = scanner.nextDouble();
-                while (!validNumber(amount))
-                {
+                while (!validNumber(amount)) {
                     System.out.println("Amount cannot be negative.");
 
                     System.out.print("Re-enter amount: ");
@@ -136,41 +168,39 @@ public class CalendarTester
 
                     System.out.println("\n===== Updated Day Information =====");
                     System.out.println(calendar.viewDay(dayNumber));
-                }
-                else if (categoryChoice == 2) {
+                } else if (categoryChoice == 2) {
                     selectedDay.setSpendingForWants(amount);
 
                     calendar.updateOverBudgetDays(analyzer);
 
                     System.out.println("\n===== Updated Day Information =====");
                     System.out.println(calendar.viewDay(dayNumber));
-                }
-                else if (categoryChoice == 3) {
+                } else if (categoryChoice == 3) {
                     selectedDay.setSavingsAllocated(amount);
 
                     calendar.updateOverBudgetDays(analyzer);
 
                     System.out.println("\n===== Updated Day Information =====");
                     System.out.println(calendar.viewDay(dayNumber));
-                }
-                else {
+                } else {
                     System.out.println("Invalid category.");
                 }
             }
 
-            else if (choice == 2){
+            else if (choice == 2) {
                 chooseFeedback(scanner, analyzer, selectedDay);
-            }
-            else if (choice == 3) {
+            } else if (choice == 3) {
                 editingDay = false;
                 System.out.println("\nReturning to main menu.");
-            }
-            else {
+            } else {
                 System.out.println("\nInvalid choice.");
             }
         }
     }
 
+    /**
+     * Prints the category selection menu for editing a day's budget values.
+     */
     public static void displayCategoryMenu() {
         System.out.println("\nChoose a category:");
         System.out.println("1. Needs");
@@ -179,11 +209,18 @@ public class CalendarTester
         System.out.print("Choose an option: ");
     }
 
+    /**
+     * Presents feedback options for the selected day and forwards the choice
+     * to the appropriate analyzer method.
+     *
+     * @param scanner  the scanner used to read keyboard input
+     * @param analyzer the budget analyzer used to generate feedback messages
+     * @param day      the day for which feedback is requested
+     */
     public static void chooseFeedback(Scanner scanner, BudgetAnalyzer analyzer, Day day) {
         boolean viewingFeedback = true;
 
-        while (viewingFeedback)
-        {
+        while (viewingFeedback) {
             System.out.println("\n===== Feedback Menu =====");
             System.out.println("1. Needs Feedback");
             System.out.println("2. Wants Feedback");
@@ -196,33 +233,41 @@ public class CalendarTester
 
             if (choice == 1) {
                 analyzer.getNeedsFeedback(day);
-            }
-            else if (choice == 2) {
+            } else if (choice == 2) {
                 analyzer.getWantsFeedback(day);
-            }
-            else if (choice == 3) {
+            } else if (choice == 3) {
                 analyzer.getSavingsFeedback(day);
-            }
-            else if (choice == 4) {
+            } else if (choice == 4) {
                 analyzer.getTotalSpendingFeedback(day);
-            }
-            else if (choice == 5) {
+            } else if (choice == 5) {
                 viewingFeedback = false;
                 System.out.println("\nReturning to day menu.");
-            }
-            else {
+            } else {
                 System.out.println("\nInvalid choice.");
             }
         }
     }
 
-    public static boolean validProportions(double needs, double wants, double savings)
-    {
+    /**
+     * Checks whether the budget proportions are valid by verifying that they
+     * add up to exactly 1.
+     *
+     * @param needs   the needs proportion
+     * @param wants   the wants proportion
+     * @param savings the savings proportion
+     * @return true if the proportions sum to 1, false otherwise
+     */
+    public static boolean validProportions(double needs, double wants, double savings) {
         return needs + wants + savings == 1;
     }
 
-    public static boolean validNumber(double number)
-    {
+    /**
+     * Checks whether a numerical input is nonnegative.
+     *
+     * @param number the value to validate
+     * @return true if the number is zero or positive, false otherwise
+     */
+    public static boolean validNumber(double number) {
         return number >= 0;
     }
 }
