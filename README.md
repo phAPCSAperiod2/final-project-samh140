@@ -1,7 +1,7 @@
 # Budget Plan Calendar
 
 ### What Does This Software Do?
-  - This software creates a 2D array with 2 rows representing two weeks and 7 columns representing the days of each week, containing Day objects that represent a two-week calendar. It asks the user for their two-week income and budget plan, and how much money they should allocate their income between the categories Needs, Wants, and Savings. Then, the user can input their spending for each day and receive feedback on how to maintain a balanced budget.
+  - This software creates a 2D array with 2 rows representing two weeks and 7 columns representing the days of each week, containing Day objects that represent a two-week calendar. It asks the user for their two-week income and budget plan, and how much money they should allocate between the categories Needs, Wants, and Savings. Then, the user can input their spending for each day and receive feedback on how to maintain a balanced budget.
 
 ### Who Is This Software For?
   - Young adults and adults (18 - 30 years old) who want to maintain a balanced budget, keep track of their spending, and receive guidance.
